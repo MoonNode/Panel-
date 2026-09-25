@@ -1,0 +1,973 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080a12"
+  >
+
+  <meta
+    name="description"
+    content="MoonNodes — Professional Minecraft server management panel."
+  >
+
+  <meta
+    name="application-name"
+    content="MoonNodes"
+  >
+
+  <meta name="color-scheme" content="dark">
+
+  <title>MoonNodes — Server Control Center</title>
+
+  <link
+    rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23080a12'/%3E%3Cpath d='M43 12c-8 3-13 10-13 19 0 11 8 19 19 19 1 0 3 0 4-.3C49 56 43 60 35 60 21 60 10 49 10 35S21 10 35 10c3 0 6 .5 8 2Z' fill='%23a78bfa'/%3E%3C/svg%3E"
+    type="image/svg+xml"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+  <div class="app-shell">
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="brand">
+        <div class="brand-mark">
+          <span>☾</span>
+        </div>
+
+        <div>
+          <strong>Moon<span>Nodes</span></strong>
+          <small>CONTROL CENTER</small>
+        </div>
+      </div>
+
+
+      <!-- Server Switcher -->
+      <div class="server-switcher">
+
+        <div class="server-avatar">
+          S
+        </div>
+
+        <div class="server-info">
+          <b>Survival</b>
+
+          <span>
+            <i class="dot online"></i>
+            Online
+          </span>
+        </div>
+
+        <button
+          class="icon-btn tiny"
+          aria-label="Switch server"
+        >
+          ⌄
+        </button>
+
+      </div>
+
+
+      <!-- Navigation -->
+      <nav class="nav" aria-label="Main navigation">
+
+        <div class="nav-label">
+          MANAGE
+        </div>
+
+        <button
+          class="nav-item active"
+          data-view="overview"
+        >
+          <span>⌂</span>
+          <span>Overview</span>
+        </button>
+
+        <button
+          class="nav-item"
+          data-view="console"
+        >
+          <span>›_</span>
+          <span>Console</span>
+        </button>
+
+        <button
+          class="nav-item"
+          data-view="files"
+        >
+          <span>▣</span>
+          <span>Files</span>
+        </button>
+
+        <button
+          class="nav-item"
+          data-view="plugins"
+        >
+          <span>◇</span>
+          <span>Plugins</span>
+        </button>
+
+        <button
+          class="nav-item"
+          data-view="mods"
+        >
+          <span>◆</span>
+          <span>Mods</span>
+        </button>
+
+        <button
+          class="nav-item"
+          data-view="versions"
+        >
+          <span>↻</span>
+          <span>Versions</span>
+        </button>
+
+
+        <div class="nav-label">
+          SERVER
+        </div>
+
+        <button
+          class="nav-item"
+          data-view="players"
+        >
+          <span>♙</span>
+          <span>Players</span>
+        </button>
+
+        <button
+          class="nav-item"
+          data-view="backups"
+        >
+          <span>◫</span>
+          <span>Backups</span>
+        </button>
+
+
+        <div class="nav-label">
+          NETWORK
+        </div>
+
+        <button
+          class="nav-item"
+          data-view="subdomains"
+        >
+          <span>⌁</span>
+          <span>Subdomains</span>
+        </button>
+
+
+        <div class="nav-label">
+          ACCOUNT
+        </div>
+
+        <button
+          class="nav-item"
+          data-view="settings"
+        >
+          <span>⚙</span>
+          <span>Settings</span>
+        </button>
+
+      </nav>
+
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+
+        <div class="status-card">
+
+          <span class="pulse"></span>
+
+          <div>
+            <b>Node healthy</b>
+            <small>All systems operational</small>
+          </div>
+
+        </div>
+
+
+        <div class="user-card">
+
+          <div class="avatar">
+            AN
+          </div>
+
+          <div>
+            <b>Admin</b>
+            <small>Administrator</small>
+          </div>
+
+          <button
+            class="icon-btn tiny"
+            aria-label="Account menu"
+          >
+            •••
+          </button>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <!-- =========================================
+         MAIN APPLICATION
+    ========================================== -->
+    <main class="main">
+
+      <!-- Top Bar -->
+      <header class="topbar">
+
+        <button
+          class="mobile-menu icon-btn"
+          id="mobileMenu"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
+        <div class="breadcrumbs">
+
+          <span>Servers</span>
+
+          <b>/</b>
+
+          <strong id="pageTitle">
+            Overview
+          </strong>
+
+        </div>
+
+
+        <div class="top-actions">
+
+          <button
+            class="icon-btn"
+            id="themeBtn"
+            title="Toggle theme"
+          >
+            ◐
+          </button>
+
+          <button
+            class="icon-btn notification"
+            title="Notifications"
+          >
+            ♢
+            <i></i>
+          </button>
+
+          <div class="top-user">
+
+            <div class="avatar small">
+              AN
+            </div>
+
+            <span>Admin</span>
+
+            <b>⌄</b>
+
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- =========================================
+           PAGE CONTENT
+      ========================================== -->
+      <section class="content">
+
+
+        <!-- =====================================
+             OVERVIEW
+        ====================================== -->
+        <div
+          class="view active"
+          id="view-overview"
+        >
+
+          <div class="page-head">
+
+            <div>
+
+              <p class="eyebrow">
+                SERVER OVERVIEW
+              </p>
+
+              <h1>
+                Good evening, Admin.
+              </h1>
+
+              <p class="muted">
+                Here's what's happening with your Minecraft server.
+              </p>
+
+            </div>
+
+
+            <div class="head-actions">
+
+              <button
+                class="btn ghost"
+                id="restartBtn"
+              >
+                ↻ Restart
+              </button>
+
+              <button
+                class="btn danger"
+                id="stopBtn"
+              >
+                ■ Stop
+              </button>
+
+              <button
+                class="btn primary"
+                id="startBtn"
+              >
+                ▶ Start
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- Server Hero -->
+          <section class="server-hero">
+
+            <div class="hero-left">
+
+              <div class="hero-icon">
+                S
+              </div>
+
+              <div>
+
+                <div class="hero-title">
+
+                  <h2>
+                    Survival
+                  </h2>
+
+                  <span class="badge online-badge">
+                    <i></i>
+                    Online
+                  </span>
+
+                </div>
+
+                <p>
+                  play.moonnodes.local
+
+                  <button
+                    class="copy-btn"
+                    data-copy="play.moonnodes.local"
+                  >
+                    ⧉
+                  </button>
+                </p>
+
+
+                <div class="hero-meta">
+
+                  <span>
+                    Paper 1.21.x
+                  </span>
+
+                  <span>•</span>
+
+                  <span>
+                    2.8 GB / 6 GB RAM
+                  </span>
+
+                  <span>•</span>
+
+                  <span>
+                    Uptime 3d 14h
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="hero-right">
+
+              <div class="quick-stat">
+
+                <small>
+                  PLAYERS
+                </small>
+
+                <b>
+                  7
+                  <em>/ 50</em>
+                </b>
+
+              </div>
+
+
+              <div class="quick-stat">
+
+                <small>
+                  TICK RATE
+                </small>
+
+                <b>
+                  19.98
+                  <em>TPS</em>
+                </b>
+
+              </div>
+
+
+              <div class="quick-stat">
+
+                <small>
+                  PORT
+                </small>
+
+                <b>
+                  25565
+                </b>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- Resource Metrics -->
+          <section class="stats-grid">
+
+            <article class="metric-card">
+
+              <div class="metric-top">
+                <span>CPU Usage</span>
+                <i>⌁</i>
+              </div>
+
+              <div class="metric-value">
+                18.4
+                <small>%</small>
+              </div>
+
+              <div class="meter">
+                <i style="width:18.4%"></i>
+              </div>
+
+              <p>
+                <span class="up">
+                  ↓ 2.1%
+                </span>
+                from last hour
+              </p>
+
+            </article>
+
+
+            <article class="metric-card">
+
+              <div class="metric-top">
+                <span>Memory</span>
+                <i>▥</i>
+              </div>
+
+              <div class="metric-value">
+                2.8
+                <small> GB</small>
+              </div>
+
+              <div class="meter purple">
+                <i style="width:46%"></i>
+              </div>
+
+              <p>
+                6 GB allocated
+              </p>
+
+            </article>
+
+
+            <article class="metric-card">
+
+              <div class="metric-top">
+                <span>Storage</span>
+                <i>◫</i>
+              </div>
+
+              <div class="metric-value">
+                31.6
+                <small> GB</small>
+              </div>
+
+              <div class="meter blue">
+                <i style="width:63%"></i>
+              </div>
+
+              <p>
+                50 GB allocated
+              </p>
+
+            </article>
+
+
+            <article class="metric-card">
+
+              <div class="metric-top">
+                <span>Network</span>
+                <i>⇅</i>
+              </div>
+
+              <div class="metric-value">
+                1.24
+                <small> MB/s</small>
+              </div>
+
+              <div class="network-mini">
+
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+
+              </div>
+
+              <p>
+                <span class="up">
+                  ↑ 842 KB/s
+                </span>
+
+                <span class="down">
+                  ↓ 398 KB/s
+                </span>
+              </p>
+
+            </article>
+
+          </section>
+
+
+          <!-- Dashboard -->
+          <div class="dashboard-grid">
+
+
+            <!-- Resource Chart -->
+            <section class="panel chart-panel">
+
+              <div class="panel-head">
+
+                <div>
+
+                  <h3>
+                    Resource usage
+                  </h3>
+
+                  <p>
+                    Live server performance
+                  </p>
+
+                </div>
+
+                <select id="chartRange">
+
+                  <option>
+                    Last 30 minutes
+                  </option>
+
+                  <option>
+                    Last 2 hours
+                  </option>
+
+                  <option>
+                    Last 24 hours
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="chart-legend">
+
+                <span>
+                  <i class="legend cpu"></i>
+                  CPU
+                </span>
+
+                <span>
+                  <i class="legend ram"></i>
+                  Memory
+                </span>
+
+              </div>
+
+
+              <div
+                class="chart"
+                id="resourceChart"
+              >
+
+                <div class="grid-lines">
+
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                  <i></i>
+
+                </div>
+
+
+                <svg
+                  viewBox="0 0 900 250"
+                  preserveAspectRatio="none"
+                  aria-label="Resource usage chart"
+                >
+
+                  <defs>
+
+                    <linearGradient
+                      id="fillCpu"
+                      x1="0"
+                      x2="0"
+                      y1="0"
+                      y2="1"
+                    >
+
+                      <stop
+                        offset="0"
+                        stop-color="#8b5cf6"
+                        stop-opacity=".28"
+                      />
+
+                      <stop
+                        offset="1"
+                        stop-color="#8b5cf6"
+                        stop-opacity="0"
+                      />
+
+                    </linearGradient>
+
+
+                    <linearGradient
+                      id="fillRam"
+                      x1="0"
+                      x2="0"
+                      y1="0"
+                      y2="1"
+                    >
+
+                      <stop
+                        offset="0"
+                        stop-color="#38bdf8"
+                        stop-opacity=".18"
+                      />
+
+                      <stop
+                        offset="1"
+                        stop-color="#38bdf8"
+                        stop-opacity="0"
+                      />
+
+                    </linearGradient>
+
+                  </defs>
+
+
+                  <path
+                    class="area ram-area"
+                    d="M0,160 C60,148 90,158 130,150 S205,155 250,142 S325,150 370,138 S445,143 490,135 S560,141 610,128 S690,139 730,126 S815,130 900,118 L900,250 L0,250Z"
+                  />
+
+
+                  <path
+                    class="area cpu-area"
+                    d="M0,182 C60,176 90,192 130,178 S205,185 250,168 S325,176 370,159 S445,178 490,151 S560,168 610,156 S690,165 730,145 S815,160 900,132 L900,250 L0,250Z"
+                  />
+
+
+                  <path
+                    class="line ram-line"
+                    d="M0,160 C60,148 90,158 130,150 S205,155 250,142 S325,150 370,138 S445,143 490,135 S560,141 610,128 S690,139 730,126 S815,130 900,118"
+                  />
+
+
+                  <path
+                    class="line cpu-line"
+                    d="M0,182 C60,176 90,192 130,178 S205,185 250,168 S325,176 370,159 S445,178 490,151 S560,168 610,156 S690,165 730,145 S815,160 900,132"
+                  />
+
+                </svg>
+
+
+                <div class="chart-axis">
+
+                  <span>−30m</span>
+                  <span>−20m</span>
+                  <span>−10m</span>
+                  <span>Now</span>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- Activity -->
+            <section class="panel activity-panel">
+
+              <div class="panel-head">
+
+                <div>
+
+                  <h3>
+                    Recent activity
+                  </h3>
+
+                  <p>
+                    Latest server events
+                  </p>
+
+                </div>
+
+                <button class="text-btn">
+                  View all
+                </button>
+
+              </div>
+
+
+              <div class="activity-list">
+
+                <div class="activity">
+
+                  <i class="activity-icon green">
+                    ✓
+                  </i>
+
+                  <div>
+
+                    <b>
+                      Server started
+                    </b>
+
+                    <span>
+                      Survival is online
+                    </span>
+
+                  </div>
+
+                  <time>
+                    2m ago
+                  </time>
+
+                </div>
+
+
+                <div class="activity">
+
+                  <i class="activity-icon purple">
+                    ↻
+                  </i>
+
+                  <div>
+
+                    <b>
+                      Backup created
+                    </b>
+
+                    <span>
+                      backup-2026-09-25-18-42
+                    </span>
+
+                  </div>
+
+                  <time>
+                    18m ago
+                  </time>
+
+                </div>
+
+
+                <div class="activity">
+
+                  <i class="activity-icon blue">
+                    +
+                  </i>
+
+                  <div>
+
+                    <b>
+                      Plugin installed
+                    </b>
+
+                    <span>
+                      EssentialsX.jar
+                    </span>
+
+                  </div>
+
+                  <time>
+                    1h ago
+                  </time>
+
+                </div>
+
+
+                <div class="activity">
+
+                  <i class="activity-icon orange">
+                    !
+                  </i>
+
+                  <div>
+
+                    <b>
+                      Player joined
+                    </b>
+
+                    <span>
+                      Steve joined Survival
+                    </span>
+
+                  </div>
+
+                  <time>
+                    2h ago
+                  </time>
+
+                </div>
+
+              </div>
+
+            </section>
+
+          </div>
+
+
+          <!-- Bottom -->
+          <div class="bottom-grid">
+
+
+            <!-- Console -->
+            <section class="panel console-preview">
+
+              <div class="panel-head">
+
+                <div>
+
+                  <h3>
+                    Live console
+                  </h3>
+
+                  <p>
+                    Real-time server output
+                  </p>
+
+                </div>
+
+                <button
+                  class="text-btn"
+                  data-go="console"
+                >
+                  Open console →
+                </button>
+
+              </div>
+
+
+              <div class="terminal compact">
+
+                <div>
+                  <span class="term-time">
+                    18:44:03
+                  </span>
+
+                  <span class="info">
+                    [Server thread/INFO]
+                  </span>
+
+                  Done (2.184s)! For help, type "help"
+                </div>
+
+
+                <div>
+                  <span class="term-time">
+                    18:44:12
+                  </span>
+
+                  <span class="info">
+                    [Server thread/INFO]
+                  </span>
+
+                  There are 7 of a max of 50 players online
+                </div>
+
+
+                <div>
+                  <span class="term-time">
+                    18:44:19
+                  </span>
+
+                  <span class="success">
+                    [Server thread/INFO]
+                  </span>
+
+                  Steve joined the game
+                </div>
+
+
+                <div>
+                  <span class="term-time">
+                    18:45:02
+                  </span>
+
+                  <span class="info">
+                    [Server thread/INFO]
+                  </span>
+
+                  Preparing spawn area: 100%
+                </div>
+
+
+                <div>
+                  <span class="term-time">
+                    18:45:11
